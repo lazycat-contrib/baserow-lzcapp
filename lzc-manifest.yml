@@ -1,18 +1,19 @@
 application:
   public_path:
-  - /
+    - /
   subdomain: baserow
   upstreams:
-  - backend: http://baserow:80/
-    location: /
+    - backend: http://baserow:80/
+      location: /
 services:
   baserow:
     binds:
-    - /lzcapp/var/data:/baserow/data
+      - /lzcapp/var/data:/baserow/data
     environment:
-    - TZ=Asia/Shanghai
-    - BASEROW_PUBLIC_URL=https://{{ .S.AppDomain }}
-    - BASEROW_CADDY_ADDRESSES=:80
-    - BASEROW_FRONTEND_COOKIE_PREFIX=baserow
+      - TZ=Asia/Shanghai
+      - BASEROW_PUBLIC_URL=https://{{ .S.AppDomain }}
+      - BASEROW_CADDY_ADDRESSES=:80
+      - BASEROW_FRONTEND_COOKIE_PREFIX=baserow
+    # upstream: baserow/baserow:2.4.1
     image: docker.1ms.run/baserow/baserow:2.4.1
 usage: 首次使用请按官方注册流程创建账号。保留 Baserow 自身登录鉴权。数据库和运行数据保存在应用内部持久目录。
